@@ -31,4 +31,5 @@ if arquivo:
     df_cc = raw_cc.iloc[data_start:, [1, 2]].copy()
     df_cc.columns = ['Centro de Custo', 'Departamento']
     df_cc = df_cc.dropna(subset=['Centro de Custo', 'Departamento'])
-    df_cc['Centro de Custo'] = df_cc['Centro de Custo]()
+    df_cc['Centro de Custo'] = df_cc['Centro de Custo'].astype(int).astype(str)
+
