@@ -13,8 +13,18 @@ def limpa_texto(texto):
 st.title("🔎 Classificador de Lançamentos")
 st.write("Preencha abaixo com o nome do fornecedor e o departamento para obter o código de lançamento e centro de custo.")
 
-# Upload do arquivo Excel
-arquivo = st.file_uploader("📤 Envie o arquivo '2148 Centro de Custo e Lucro.xlsx'", type=["xlsx"])
+# Leitura do Excel embutido no repositório
+CAMINHO_EXCEL = "2148 Centro de Custo e Lucro.xlsx"
+
+df_sup = pd.read_excel(CAMINHO_EXCEL, sheet_name='Mapeamento')
+df_sup.columns = df_sup.columns.str.strip()
+FORN_COL = 'Descrição da conta de contrapartida'
+FORN_CODE_COL = 'Classe de custo'
+df_sup[FORN_COL] = df_sup[FORN_COL].apply(limpa_texto)
+lista_fornecedores = df_sup[FORN_COL].dropna().unique().tolist()
+
+raw_cc = pd.read_excel(CAMINHO_EXCEL, sheet_name='Centro de Custo', header=None)
+
 
 if arquivo:
     # Carrega os dados
