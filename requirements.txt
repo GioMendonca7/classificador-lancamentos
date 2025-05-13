@@ -1,0 +1,5 @@
+pandas
+openpyxl
+fuzzywuzzy[speedup]
+unidecode
+streamlit
